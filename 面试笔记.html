@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>233</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	//"堆"内存是存储引用值得空间
+	//"栈"内存存贮基本类型和代码运行环境得地址
+	
+	
+	//作业练习题
+	function A(){
+		alert(1);
+	}
+	
+	
+	function Fn(){
+		A = function(){
+			alert(2);
+		};
+		//return this;
+	}
+	
+	Fn.A = A;
+	
+	Fn.prototype = {
+		A : function(){
+			alert(3)
+		}
+	}
+	
+	A();
+	Fn.A();
+	Fn().A();
+	new Fn.A();
+	new Fn().A();
+	new new Fn().A();
+	
+	
+	
+	
+	
+</script>

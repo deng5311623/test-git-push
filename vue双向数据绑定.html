@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		姓名： <span id='spanName'></span>
+		<br />
+		<input type="text" id='inputName' />
+	</body>
+</html>
+<script>
+	
+	/**
+	 * 1.对央视数据克隆
+	 * 2.分别给对象中定的每一个设置监听
+	 * **/
+	
+//	let obj ={
+//		name:'',
+//	}
+	
+	//深克隆一份
+//	let newObj = JSON.parse(JSON.stringify(obj));
+//	
+//
+//	Object.defineProperty(obj,'name',{
+//		get(){
+//			return newObj.name;
+//		},
+//		set(val){
+//			if(val === newObj.name) return;
+//			newObj.name = val;
+//			observer();
+//		}
+//	})
+//	
+//	//观察者方法
+//	function observer(){
+//		spanName.innerHTML = obj.name;
+//		inputName.value = obj.name;
+//	}
+//	
+//	//数据的改变影响视图
+////	setTimeout(function(){
+////		obj.name = '测试双向绑定'
+////	},3000)
+//	
+//	
+//	
+//	inputName.oninput = function (){
+//		obj.name = this.value;
+//	}
+//	
+	
+	
+	let obj = {};
+	obj = new Proxy(obj,{
+		get(target,prop){
+			console.log('a');
+			return target[prop]
+		},
+		set(target,prop,val){
+			console.log('b');
+			target[prop] = val;
+			observer();
+		}
+		
+	})
+	
+	//	//观察者方法
+	function observer(){
+		spanName.innerHTML = obj.name;
+		inputName.value = obj.name;
+	}
+	
+	inputName.oninput = function (){
+		obj.name = this.value;
+	}
+</script>
